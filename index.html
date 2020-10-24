@@ -10,7 +10,40 @@
 
   <link href="css/style.css" rel="stylesheet">
 </head>
+<script src = "/socket.io/socket.io.js"></script>
+<script>
+  var socket = io()
+  var userlist
+  var loginStatus = false
+  function login(){
+    console.log('hello')
+    socket.emit('login', document.getElementById('userName').value)
+    loginStatus = true
+  }
+  socket.on('userlist', function(data){
+    userlist = data
+    if (loginStatus){
+      updateUI(data)
+    }
+  })
+  function updateUI(data){
+    var element = document.getElementById('roomForm');
+    if(element){
+      element.parentNode.removeChild(element);
+    }
+    
+    var temp = document.getElementById('userList')
+    temp.innerHTML = ''
+    for (var i = 0; i < data.users.length; i++){
+      var whatever = document.createElement('p') 
+      whatever.textContent = data.users[i]
+      // ["Steve", "Eric"]
+      temp.appendChild(whatever)
 
+    }
+  console.log(data)
+  }
+</script>
 <body>
 
 <form id="roomForm">
@@ -18,9 +51,11 @@
   <input type="text" id="roomName"><br>
   <label for="userName">Username</label><br/>
   <input type="text" id="userName"><br>
+  <button type="button" id="connect" onclick=login()>Connect</button>
 </form>
+<div id=userList>
 
-  <script src="js/script.js"></script>
+</div>
 </body>
 
 </html>
