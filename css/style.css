@@ -1,0 +1,13 @@
+#roomForm {
+    border: solid;
+    max-width: 500px;
+    height: 100px;
+    position: center;
+}
+
+#roomForm > * {
+    /* justify-content: center;
+    align-items: center;
+    display: flex; */
+    margin: 0 0 0 30%;
+}
