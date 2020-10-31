@@ -28,10 +28,12 @@
   })
   function updateUI(data){
     var element = document.getElementById('roomForm');
+    var chatElement = document.getElementById('chat');
     if(element){
       element.parentNode.removeChild(element);
-    }
-    
+      chatElement.style.display = 'block';
+    } 
+
     var temp = document.getElementById('userList')
     temp.innerHTML = ''
     for (var i = 0; i < data.users.length; i++){
@@ -42,7 +44,7 @@
 
     }
   console.log(data)
-  }
+  } 
 </script>
 <body>
 
@@ -55,6 +57,10 @@
 </form>
 <div id=userList>
 
+</div>
+<div id="chat">
+  <input id="message" type="text" placeholder="Type your message here!"/>
+  <button type="button" id="send" onclick=send()>Send</button>
 </div>
 </body>
 

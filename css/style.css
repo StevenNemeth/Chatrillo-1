@@ -21,7 +21,31 @@
     top: 5px;
     right: 5px;
     width: 250px;
-    height: 500px;
+    height: 925px;
     border: solid;
     border-color: black;
+}
+
+#chat {
+    position: absolute;
+    border: solid;
+    height: 110px;
+    width: 1620x;
+    top: 820px;
+    display: none;    
+    
+}
+
+#message {
+    text-align: left;
+    height: 20px;
+    width: 1612px;
+    
+}
+
+#send {
+    position: fixed;
+    bottom: 35px;
+    left: 1585px;
+   
 }
