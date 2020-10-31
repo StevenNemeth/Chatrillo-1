@@ -20,8 +20,8 @@
     position: fixed;
     top: 5px;
     right: 5px;
-    width: 250px;
-    height: 925px;
+    width: 20%;
+    height: 100%;
     border: solid;
     border-color: black;
 }
@@ -30,7 +30,7 @@
     position: absolute;
     border: solid;
     height: 110px;
-    width: 1620x;
+    width: 75%;
     top: 820px;
     display: none;    
     
@@ -39,13 +39,21 @@
 #message {
     text-align: left;
     height: 20px;
-    width: 1612px;
+    width: 98%;
     
 }
 
 #send {
     position: fixed;
-    bottom: 35px;
-    left: 1585px;
+    bottom: 25px;
+    left: 20px;
    
+}
+#messageLog{
+    position: absolute;
+    border: solid;
+    border-color: black;
+    width: 75%;
+    height: 80%;
+
 }
