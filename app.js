@@ -41,6 +41,6 @@ app.get("/js/script.js", (req, res) => {
     res.sendFile(path.join(__dirname + '/js/script.js'))
 });
 
-http.listen(3000, function(){
-    console.log('listening on localhost:3000');
+http.listen(port, function(){
+    console.log('listening on localhost: ' + port);
 });
