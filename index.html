@@ -15,6 +15,7 @@
   var socket = io()
   var userlist
   var loginStatus = false
+  
   function login(){
     console.log('hello')
     socket.emit('login', document.getElementById('userName').value)
@@ -26,6 +27,7 @@
       updateUI(data)
     }
   })
+
   function updateUI(data){
     var element = document.getElementById('roomForm');
     var chatElement = document.getElementById('chat');
@@ -34,15 +36,21 @@
       chatElement.style.display = 'block';
     } 
 
+    var newDiv = document.createElement('div')
+    newDiv.id = 'userList'
     var temp = document.getElementById('userList')
-    temp.innerHTML = ''
+    if(temp){
+      temp.innerHTML = ''
+
+    }
     for (var i = 0; i < data.users.length; i++){
       var whatever = document.createElement('p') 
       whatever.textContent = data.users[i]
       // ["Steve", "Eric"]
-      temp.appendChild(whatever)
+      newDiv.appendChild(whatever)
 
     }
+    document.getElementsByTagName('body')[0].appendChild(newDiv)
   console.log(data)
   } 
 </script>
@@ -55,6 +63,7 @@
   <input type="text" id="userName"><br>
   <button type="button" id="connect" onclick=login()>Connect</button>
 </form>
+<<<<<<< HEAD
 <div id=userList>
 
 </div>
@@ -62,6 +71,8 @@
   <input id="message" type="text" placeholder="Type your message here!"/>
   <button type="button" id="send" onclick=send()>Send</button>
 </div>
+=======
+>>>>>>> main
 </body>
 
 </html>
