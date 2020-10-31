@@ -14,13 +14,15 @@ io.on('connection', function(socket) {
             console.log(data)
             users.push(data)
             io.emit('userlist', {users})
+            io.emit('messageList', chatLog)
         }
     })
     socket.on('message', function(chatMessage){
-        if(chatMessage !== ''){
-            console.log(chatMessage)
-            chatLog.push(chatMessage)
-            io.emit('messageList', {chatLog})
+        if(Array.isArray(chatMessage) && chatMessage[1] !== ''){
+            
+            chatLog.push(chatMessage[0] + ": " + chatMessage[1])
+            io.emit('messageList', chatLog )
+            console.log(chatLog)
         }
     })
 });
