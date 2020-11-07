@@ -35,6 +35,9 @@
     display: none;    
     
 }
+#error{
+    display:none;
+}
 
 #roomName {
     display: none;

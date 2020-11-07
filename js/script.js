@@ -4,13 +4,17 @@ var userName
 var roomName
 
 function login() {
-  console.log('hello')
   userName = document.getElementById('userName').value
   roomName = document.getElementById('roomNameInput').value
   var loginData = [userName, roomName]
   socket.emit('login', loginData)
   loginStatus = true
 }
+socket.on('errorMsg', function(errorMsg){ //socket event 'error' is a reserved event
+  document.getElementById('error').textContent = errorMsg
+  document.getElementById('error').style.display = 'block'
+  // error div is set to default display: none
+})
 socket.on('userlist', function (data) {
   if (loginStatus) {
     updateUI(data)
@@ -18,7 +22,6 @@ socket.on('userlist', function (data) {
 })
 
 socket.on('messageList', function (chatMessages) {
-  console.log(chatMessages)
   const messageLog = document.getElementById('messageLog')
   messageLog.innerHTML = ''
   chatMessages.forEach(function (message) {
@@ -36,7 +39,9 @@ function send() {
   document.getElementById('message').value = ''
 }
 
-function updateUI(data) {
+function updateUI(data) { // gets rid of error message after succeful login
+  document.getElementById('error').style.display = 'none'
+
 
   // Get the input field
   var input = document.getElementById("message");
@@ -58,7 +63,7 @@ function updateUI(data) {
   var chatElement = document.getElementById('chat');
   var element = document.getElementById('roomForm');
 
-  if (element) {
+  if (element) { // removes login form once connected to a room
     element.parentNode.removeChild(element);
     chatElement.style.display = 'block';
   }
@@ -70,7 +75,7 @@ function updateUI(data) {
   var newDiv = document.createElement('div')
   newDiv.id = 'userList'
   var temp = document.getElementById('userList')
-  if (temp) {
+  if (temp) { // resets userlist so that it appends respectivly 
     temp.innerHTML = ''
 
   }
@@ -78,9 +83,10 @@ function updateUI(data) {
     var user = document.createElement('p')
     user.textContent = data[i]
     if(userName === data[i]){
+      //this colors the current user (you) pink
       user.style.color = 'pink'
     }
-    // ["Steve", "Eric"]
+    // adds user to the end of a newly created div
     newDiv.appendChild(user)
 
   }
