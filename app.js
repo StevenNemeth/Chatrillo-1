@@ -3,18 +3,20 @@ const path = require('path')
 const app = express()
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const users = [];
-const chatLog = [];
+const users = {}  // userName: {room, socket} // name, room, socket };
+const chatLog = {}; //roomName {messageArr}
+const rooms = {}; // roomName {userList}
 const port = process.env.PORT || 3000
 
 io.on('connection', function(socket) {
     console.log('A user connected');
     socket.on('login', function(data) {
-        if(data !== '' && users.indexOf(data) === -1 ){
-            console.log(data)
-            users.push(data)
-            io.emit('userlist', {users})
-            io.emit('messageList', chatLog)
+        if(data[0] !== '' && data[1] !== '' ){
+            users[data[0]] = {room: data[1], socket}
+            //rooms[data[1]] = {}//check if roomdata[1] exists
+            rooms[data[1]] = rooms[data[1]] ? [...rooms[data[1]], data[0]]: [data[0]]
+            io.emit('userlist', rooms[data[1]])
+            //io.emit('messageList', chatLog)
         }
     })
     socket.on('message', function(chatMessage){
@@ -22,7 +24,6 @@ io.on('connection', function(socket) {
             
             chatLog.push(chatMessage[0] + ": " + chatMessage[1])
             io.emit('messageList', chatLog )
-            console.log(chatLog)
         }
     })
 });

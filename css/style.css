@@ -36,6 +36,10 @@
     
 }
 
+#roomName {
+    display: none;
+}
+
 #message {
     text-align: left;
     height: 20px;

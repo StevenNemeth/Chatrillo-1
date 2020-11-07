@@ -1,12 +1,14 @@
-  var socket = io()
-  var loginStatus = false
-  var userName
+var socket = io()
+var loginStatus = false
+var userName
 
   function login(){
     console.log('hello')
-    socket.emit('login', document.getElementById('userName').value)
-    loginStatus = true
     userName = document.getElementById('userName').value
+    roomName = document.getElementById('roomNameInput').value
+    var loginData = [userName, roomName]
+    socket.emit('login', loginData)
+    loginStatus = true
   }
   socket.on('userlist', function(data){
     if (loginStatus){
@@ -50,12 +52,18 @@ input.addEventListener("keydown", function(event) {
   }
 });
 
-    var element = document.getElementById('roomForm');
-    var chatElement = document.getElementById('chat');
+var roomElement = document.getElementById('roomName');
+var chatElement = document.getElementById('chat');
+var element = document.getElementById('roomForm');
+
     if(element){
       element.parentNode.removeChild(element);
       chatElement.style.display = 'block';
-    } 
+    }
+    if(roomElement){
+      roomElement.style.display ='block';
+    }
+    
 
     var newDiv = document.createElement('div')
     newDiv.id = 'userList'
@@ -64,9 +72,9 @@ input.addEventListener("keydown", function(event) {
       temp.innerHTML = ''
 
     }
-    for (var i = 0; i < data.users.length; i++){
+    for (var i = 0; i < data.length; i++){
       var user = document.createElement('p') 
-      user.textContent = data.users[i]
+      user.textContent = data[i]
       // ["Steve", "Eric"]
       newDiv.appendChild(user)
 
