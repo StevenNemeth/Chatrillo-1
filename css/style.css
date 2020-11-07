@@ -36,17 +36,21 @@
     
 }
 
+#roomName {
+    display: none;
+}
+
 #message {
     text-align: left;
     height: 20px;
-    width: 98%;
+    width: 99.4%;
     
 }
 
 #send {
     position: fixed;
-    bottom: 25px;
-    left: 20px;
+    bottom: 40px;
+    left: 15px;
    
 }
 #messageLog{
