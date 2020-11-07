@@ -12,13 +12,15 @@ io.on('connection', function(socket) {
     console.log('A user connected');
     socket.on('login', function(data) {
         if(data[0] !== '' && data[1] !== '' ){
-            if(rooms[data[1]] === undefined || (Array.isArray(rooms[data[1]]) && rooms[data[1]].indexOf(data[0]) === -1 )){
+            if(rooms[data[1]] === undefined || (Array.isArray(rooms[data[1]]) && rooms[data[1]].indexOf(data[0]) === -1 )){  // Checks to see if a room doesn't exist and if a username doesn't exist within the given room, it will run the code.
                 users[data[0]] = {room: data[1], socket}
                 //rooms[data[1]] = {}//check if roomdata[1] exists
                 socket.join(data[1])
                 rooms[data[1]] = rooms[data[1]] ? [...rooms[data[1]], data[0]]: [data[0]]
                 io.in(data[1]).emit('userlist', rooms[data[1]])
                 io.in(data[1]).emit('messageList', chatLog[data[1]])
+            } else {
+                socket.emit('errorMsg', 'Name is already taken for this room')
             }
 
         }
@@ -30,7 +32,6 @@ io.on('connection', function(socket) {
             } else {
                 chatLog[chatMessage[1]] = [chatMessage[0] + ": " + chatMessage[2]]
             }
-            console.log(chatLog, 'Chat log ====')
             io.in(chatMessage[1]).emit('messageList', chatLog[chatMessage[1]] )
         }
     })
