@@ -62,13 +62,17 @@ function updateUI(data) { // gets rid of error message after succeful login
   var roomElement = document.getElementById('roomName');
   var chatElement = document.getElementById('chat');
   var element = document.getElementById('roomForm');
+  var copy = document.getElementById('copy')
 
   if (element) { // removes login form once connected to a room
     element.parentNode.removeChild(element);
     chatElement.style.display = 'block';
   }
   if (roomElement) {
-    roomElement.style.display = 'block';
+    roomElement.style.display = 'inline';
+  }
+  if(copy) {
+    copy.style.display = 'inline';
   }
 
 
@@ -83,8 +87,8 @@ function updateUI(data) { // gets rid of error message after succeful login
     var user = document.createElement('p')
     user.textContent = data[i]
     if(userName === data[i]){
-      //this colors the current user (you) pink
-      user.style.color = 'pink'
+      //this colors the current user (you) white
+      user.style.color = 'white'
     }
     // adds user to the end of a newly created div
     newDiv.appendChild(user)

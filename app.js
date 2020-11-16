@@ -46,6 +46,9 @@ app.get("/", (req, res) => {
 app.get("/css/style.css", (req, res) => {
     res.sendFile(path.join(__dirname + '/css/style.css'))
 });
+app.get("/css/all.css", (req, res) => {
+    res.sendFile(path.join(__dirname + '/css/css/all.css'))
+});
 
 app.get("/js/script.js", (req, res) => {
     res.sendFile(path.join(__dirname + '/js/script.js'))
