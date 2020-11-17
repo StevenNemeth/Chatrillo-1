@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/escouten0/Chatrillo.git"
+    "url": "git+https://github.com/StevenNemeth/Chatrillo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/escouten0/Chatrillo/issues"
+    "url": "https://github.com/StevenNemeth/Chatrillo/issues"
   },
-  "homepage": "https://github.com/escouten0/Chatrillo#readme",
+  "homepage": "https://github.com/StevenNemeth/Chatrillo#readme",
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
